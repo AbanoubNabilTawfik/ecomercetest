@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { BasketService } from './basket/basket.service';
 import { Pagination } from './shared/models/pagination';
 import { Product } from './shared/models/product';
 
@@ -9,7 +10,7 @@ import { Product } from './shared/models/product';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private basketService:BasketService) {
 
    }
   products: Product[] = [];
@@ -23,6 +24,8 @@ export class AppComponent implements OnInit {
         console.log('extra statment');
       }
     })
+    const basketId= localStorage.getItem("basket_Id");
+    if(basketId) this.basketService.getBasket(basketId);
   }
   title = 'Shopping';
 }

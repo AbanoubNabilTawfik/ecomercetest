@@ -20,6 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["cuid"],
             "outputPath": "dist/ClientTest",
             "index": "src/index.html",
             "main": "src/main.ts",
