@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from './account/account.service';
 import { BasketService } from './basket/basket.service';
 import { Pagination } from './shared/models/pagination';
 import { Product } from './shared/models/product';
@@ -10,7 +11,7 @@ import { Product } from './shared/models/product';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private http:HttpClient,private basketService:BasketService) {
+  constructor(private http:HttpClient,private basketService:BasketService,private accountService:AccountService) {
 
    }
   products: Product[] = [];
@@ -26,6 +27,13 @@ export class AppComponent implements OnInit {
     })
     const basketId= localStorage.getItem("basket_Id");
     if(basketId) this.basketService.getBasket(basketId);
+    this.loadCurrentUser();
   }
   title = 'Shopping';
+
+  loadCurrentUser()
+  {
+    const token= localStorage.getItem('token');
+    this.accountService.loadCurrentUser(token).subscribe();
+  }
 }
