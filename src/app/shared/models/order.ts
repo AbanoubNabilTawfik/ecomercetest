@@ -17,7 +17,8 @@ export interface Order
     shippingPrice:number;
     orderItems:OrderItem[];
     subtotal:number;
-    status:string
+    status:string;
+    total:number;
 }
 
 export interface OrderItem
